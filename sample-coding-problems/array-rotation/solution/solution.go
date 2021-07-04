@@ -18,7 +18,7 @@ func Solution(A []int, K int) []int {
 	}
 
 	if K >= len(A) {
-		K = len(A) % K
+		K = K % len(A)
 	}
 
 	if K == 0 {

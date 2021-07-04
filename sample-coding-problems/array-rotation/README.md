@@ -110,4 +110,4 @@ got [710, 807, 568, 560, .. expected [155, 710, 807, 568, ..
 Some logic issues I guess, hmm
 
 TODO:
-- Fix program correctness for simple cases - where rotation is not properly happening
+- Fix program correctness for simple cases - where rotation is not properly happening - DONE

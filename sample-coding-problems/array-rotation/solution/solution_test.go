@@ -45,6 +45,11 @@ func TestSolution(t *testing.T) {
 			k:              100,
 			expectedOutput: []int{1, 2, 3, 4},
 		},
+		{
+			array:          []int{1, 2, 3, 4},
+			k:              99,
+			expectedOutput: []int{2, 3, 4, 1},
+		},
 	}
 
 	for _, testCase := range testCases {
