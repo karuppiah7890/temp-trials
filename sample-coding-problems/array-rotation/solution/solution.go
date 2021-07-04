@@ -13,7 +13,15 @@ func rotateLeft(A []int, K int) []int {
 }
 
 func Solution(A []int, K int) []int {
-	if len(A) == K {
+	if len(A) == 0 {
+		return A
+	}
+
+	if K >= len(A) {
+		K = len(A) % K
+	}
+
+	if K == 0 {
 		return A
 	}
 
