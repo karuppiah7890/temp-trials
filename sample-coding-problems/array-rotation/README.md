@@ -77,3 +77,9 @@ Expected Output: []
 Test results - PDF
 
 [cyclic-rotation-test-results-codility.pdf](./cyclic-rotation-test-results-codility.pdf)
+
+---
+
+TODO:
+- Fix runtime errors - slice bounds out of range errors
+- Fix assumption that K <= length(A)
