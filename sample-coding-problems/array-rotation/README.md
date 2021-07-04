@@ -81,5 +81,33 @@ Test results - PDF
 ---
 
 TODO:
-- Fix runtime errors - slice bounds out of range errors
-- Fix assumption that K <= length(A)
+- Fix runtime errors - slice bounds out of range errors - DONE
+- Fix assumption that K <= length(A) - DONE
+
+---
+
+I got some wrong answers
+
+```
+small functional tests, K >= N
+
+ WRONG ANSWER
+got [-1, -2, -3, -4, -5, -.. expected [-3, -4, -5, -6, -1, -.. 
+
+WRONG ANSWER, got [-1, -2, -3, -4, -5, -.. expected [-3, -4, -5, -6, -1, -.. 
+```
+
+```
+maximal N and K
+
+ WRONG ANSWER
+got [710, 807, 568, 560, .. expected [155, 710, 807, 568, ..
+
+ WRONG ANSWER, got [710, 807, 568, 560, .. expected [155, 710, 807, 568, ..
+
+```
+
+Some logic issues I guess, hmm
+
+TODO:
+- Fix program correctness for simple cases - where rotation is not properly happening
