@@ -685,3 +685,5 @@ Bytes per second: sent 59.2, received 363.9
 debug1: Exit status 3
 packer_tutorial $ 
 ```
+
+https://learn.hashicorp.com/tutorials/packer/aws-get-started-variables?in=packer/aws-get-started
