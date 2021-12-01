@@ -293,3 +293,114 @@ setupEnvironment
 installPackages
 simple-game $
 ```
+
+```bash
+ PASS  src/services/helperService.test.js
+ PASS  src/services/playerManger.test.js
+ PASS  src/services/targetManager/index.test.js
+ PASS  src/services/gameService.test.js
+ PASS  src/core/actions.test.js
+ PASS  src/services/positionService.test.js
+ PASS  src/components/game.test.js
+ PASS  src/components/gameScreen.test.js
+ PASS  src/components/bullet.test.js
+ PASS  src/components/target.test.js
+ PASS  src/components/gameOverScreen.test.js
+ PASS  src/components/healthBar.test.js
+ PASS  src/components/score.test.js
+ PASS  src/components/flight.test.js
+ PASS  src/components/restart.test.js
+ PASS  src/components/cloud.test.js
+ PASS  src/components/container.test.js
+ PASS  src/services/ticker/index.test.js
+ PASS  src/services/ticker/masterLoop.test.js
+ PASS  src/App.test.js
+
+Test Suites: 20 passed, 20 total
+Tests:       66 passed, 66 total
+Snapshots:   0 total
+Time:        6.794 s
+Ran all test suites.
+
+Watch Usage
+ › Press f to run only failed tests.
+ › Press o to only run tests related to changed files.
+ › Press q to quit watch mode.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press Enter to trigger a test run.
+
+simple-game $ less package.json
+simple-game $ less package.json
+simple-game $ less package.json
+simple-game $ npx pnpm test-ci
+
+> react-starter@0.1.0 test-ci /Users/karuppiahn/projects/github.com/NirupanJoe/simple-game
+> npm run test-dev -- --coverage
+
+
+> react-starter@0.1.0 test-dev
+> react-scripts test --watchAll=false "--coverage"
+
+ PASS  src/services/helperService.test.js (6.899 s)
+ PASS  src/services/gameService.test.js (6.99 s)
+ PASS  src/services/targetManager/index.test.js (6.992 s)
+ PASS  src/services/positionService.test.js (7.005 s)
+ PASS  src/services/playerManger.test.js (7.105 s)
+ PASS  src/core/actions.test.js (7.178 s)
+ PASS  src/components/score.test.js (7.208 s)
+ PASS  src/components/healthBar.test.js (7.261 s)
+ PASS  src/components/target.test.js (7.263 s)
+ PASS  src/components/bullet.test.js (7.257 s)
+ PASS  src/components/gameOverScreen.test.js (7.34 s)
+ PASS  src/components/game.test.js (7.405 s)
+ PASS  src/components/restart.test.js (7.313 s)
+ PASS  src/components/flight.test.js (7.344 s)
+ PASS  src/components/gameScreen.test.js (7.463 s)
+ PASS  src/components/container.test.js
+ PASS  src/services/ticker/index.test.js
+ PASS  src/services/ticker/masterLoop.test.js
+ PASS  src/components/cloud.test.js
+ PASS  src/App.test.js
+----------------------------|---------|----------|---------|---------|-------------------
+File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------------------------|---------|----------|---------|---------|-------------------
+All files                   |     100 |      100 |     100 |     100 |
+ src                        |     100 |      100 |     100 |     100 |
+  App.js                    |     100 |      100 |     100 |     100 |
+ src/components             |     100 |      100 |     100 |     100 |
+  bullet.js                 |     100 |      100 |     100 |     100 |
+  cloud.js                  |     100 |      100 |     100 |     100 |
+  container.js              |     100 |      100 |     100 |     100 |
+  flight.js                 |     100 |      100 |     100 |     100 |
+  game.js                   |     100 |      100 |     100 |     100 |
+  gameOverScreen.js         |     100 |      100 |     100 |     100 |
+  gameScreen.js             |     100 |      100 |     100 |     100 |
+  healthBar.js              |     100 |      100 |     100 |     100 |
+  restart.js                |     100 |      100 |     100 |     100 |
+  score.js                  |     100 |      100 |     100 |     100 |
+  target.js                 |     100 |      100 |     100 |     100 |
+ src/core                   |     100 |      100 |     100 |     100 |
+  actions.js                |     100 |      100 |     100 |     100 |
+  config.js                 |     100 |      100 |     100 |     100 |
+  context.js                |     100 |      100 |     100 |     100 |
+  seed.js                   |     100 |      100 |     100 |     100 |
+ src/services               |     100 |      100 |     100 |     100 |
+  gameService.js            |     100 |      100 |     100 |     100 |
+  helperService.js          |     100 |      100 |     100 |     100 |
+  playerManger.js           |     100 |      100 |     100 |     100 |
+  positionService.js        |     100 |      100 |     100 |     100 |
+ src/services/targetManager |     100 |      100 |     100 |     100 |
+  index.js                  |     100 |      100 |     100 |     100 |
+ src/services/ticker        |     100 |      100 |     100 |     100 |
+  index.js                  |     100 |      100 |     100 |     100 |
+  masterLoop.js             |     100 |      100 |     100 |     100 |
+----------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 20 passed, 20 total
+Tests:       66 passed, 66 total
+Snapshots:   0 total
+Time:        11.309 s
+Ran all test suites.
+simple-game $
+```
