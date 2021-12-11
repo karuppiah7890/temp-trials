@@ -13,7 +13,7 @@ type Person struct {
 	id        int
 	name      string
 	gender    Gender
-	relations map[string]*Person
+	relations map[string][]*Person
 }
 
 func (p *Person) GetID() int {
@@ -28,6 +28,6 @@ func (p *Person) GetGender() Gender {
 	return p.gender
 }
 
-func (p *Person) GetRelations() map[string]*Person {
+func (p *Person) GetRelations() map[string][]*Person {
 	return p.relations
 }

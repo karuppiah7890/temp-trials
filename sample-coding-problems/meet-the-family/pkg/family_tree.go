@@ -1,4 +1,4 @@
-// TODO(karuppiah7890): Try to change the name of the package and the package directory 
+// TODO(karuppiah7890): Try to change the name of the package and the package directory
 // from pkg to something like family_tree or familytree or similar. pkg is too generic
 package pkg
 
@@ -11,6 +11,25 @@ type familyTree struct {
 	family      map[string]*Person
 }
 
+type PersonNotFoundError string
+
+func (e PersonNotFoundError) Error() string {
+	return string(e)
+}
+
+type PersonNotMotherError string
+
+func (e PersonNotMotherError) Error() string {
+	return string(e)
+}
+
+// TODO(karuppiah7890): Think about initializing a Family Tree with at least one / exactly one person.
+// This person would be kinda the root of the family. We then won't need AddPerson to add the root person
+// of the family. AddPerson has a problem where a Person could be added with no relationship to any person
+// in the family which doesn't make sense, and it's helpful to just add the root person (male/female). We can
+// use something like AddSpouse or generic AddRelation to add other relations / relatives (people with relationship)
+// after the root person is present in the family tree
+
 func NewFamilyTree() familyTree {
 	return familyTree{
 		familyCount: 0,
@@ -21,12 +40,42 @@ func NewFamilyTree() familyTree {
 func (f *familyTree) AddPerson(name string, gender Gender) {
 	f.familyCount++
 	person := Person{
-		id:     f.familyCount,
-		name:   name,
-		gender: gender,
+		id:        f.familyCount,
+		name:      name,
+		gender:    gender,
+		relations: make(map[string][]*Person),
 	}
 	f.family[person.name] = &person
 }
+
+func (f *familyTree) AddChildToMother(motherName string, childName string, childGender Gender) error {
+	mother, err := f.GetPerson(motherName)
+
+	if err != nil {
+		return PersonNotFoundError(fmt.Sprintf("Mother named '%s' not found", motherName))
+	}
+
+	if !mother.gender.IsFemale() {
+		return PersonNotMotherError(fmt.Sprintf("Person named '%s' is not a mother", motherName))
+	}
+
+	f.familyCount++
+	child := &Person{
+		id:        f.familyCount,
+		name:      childName,
+		gender:    childGender,
+		relations: make(map[string][]*Person),
+	}
+
+	mother.relations[Child.Name] = append(mother.relations[Child.Name], child)
+	child.relations[Child.ReverseRelationship.Name] = append(child.relations[Child.ReverseRelationship.Name], mother)
+
+	f.family[child.name] = child
+
+	return nil
+}
+
+// TODO(karuppiah7890): AddSpouseToPerson(personName string, spouseName string, spouseGender Gender)
 
 func (f *familyTree) GetFamilyCount() int {
 	return f.familyCount
@@ -35,6 +84,7 @@ func (f *familyTree) GetFamilyCount() int {
 func (f *familyTree) GetPerson(name string) (*Person, error) {
 	person, ok := f.family[name]
 
+	// TODO(karuppiah7890): Use PersonNotFoundError error type here
 	if !ok {
 		return nil, fmt.Errorf("Person named '%s' not found", name)
 	}

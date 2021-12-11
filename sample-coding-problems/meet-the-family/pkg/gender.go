@@ -18,3 +18,14 @@ func (g Gender) IsMale() bool {
 func (g Gender) IsFemale() bool {
 	return g == Female
 }
+
+func (g Gender) String() string {
+	switch g {
+	case Male:
+		return "Male"
+	case Female:
+		return "Female"
+	default:
+		return "Unknown Gender"
+	}
+}

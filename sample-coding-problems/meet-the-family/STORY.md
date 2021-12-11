@@ -101,7 +101,7 @@ var Ray, Kay, Bay Person = Person{}, Person{}, Person{}
 
 Sarah := Person{
     Name: "Sarah",
-    Relations: map[string]*Person{
+    Relations: map[string][]*Person{
         "Child": [ &Ray, &Kay ],
         "Spouse": [ &Bay ],
     }
@@ -173,3 +173,14 @@ Family Count (total folks in family) can be used for the unique number generatio
 In the above case, we store all the people in the family in the map, which makes it easy to quickly find a person in the family. The key is the name assuming it's unique, or else we could use person ID but that won't be useful when finding people with name which is important for our operations. But we still need unique ID for sorting in the output
 
 The name in the struct is important though it's duplicate from key name. It's important because when traversing the family tree, we will get pointers to person struct, and that's just the value in the map, and we would need people's name in a lot of cases, so we need it in the struct as we can't find key (person name) from value, that's not helpful but instead tedious and unnecessary and is absurd
+
+---
+
+In a Family Tree, for a person, there's
+
+- Name
+- Gender
+- ID
+- Relations
+
+From an outside perspective, every time when we need to pass person details - we have to pass name and gender, instead can we pass person here too, but a different person type. Not sure what the name would be. But yeah, I could still do away with name and gender in function / method call instead of putting it in struct as that struct would have only two fields, but yeah, they are related fields - fields related to a person
