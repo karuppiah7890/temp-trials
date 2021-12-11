@@ -161,9 +161,9 @@ Since we can assume that the family members names are unique, the family tree co
 ```go
 FamilyTree {
     FamilyCount: 2,
-    Family: map[string]Person{
-        "Ankit": Person{Name: "Ankit", ID: 1, Relations: ...},
-        "Parag": Person{Name: "Parag", ID: 2, Relations: ...},
+    Family: map[string]*Person{
+        "Ankit": &Person{Name: "Ankit", ID: 1, Relations: ...},
+        "Parag": &Person{Name: "Parag", ID: 2, Relations: ...},
     }
 }
 ```
