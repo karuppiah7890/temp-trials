@@ -67,6 +67,9 @@ func (f *familyTree) AddChildToMother(motherName string, childName string, child
 		relations: make(map[string][]*Person),
 	}
 
+	// TODO(karuppiah7890): This feels a bit complicated due to some premature generalization idea for any
+	// relationship. We should make it specific and simple and give an idea of how to generalize it for later
+	// but not do it
 	mother.relations[Child.Name] = append(mother.relations[Child.Name], child)
 	child.relations[Child.ReverseRelationship.Name] = append(child.relations[Child.ReverseRelationship.Name], mother)
 

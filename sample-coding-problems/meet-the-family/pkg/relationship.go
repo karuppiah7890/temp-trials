@@ -2,15 +2,24 @@ package pkg
 
 type Relationship struct {
 	Name                string
+	// TODO(karuppiah7890): This ReverseRelationship feels a bit complicated due to some premature generalization idea for any
+	// relationship. We should make it specific and simple and give an idea of how to generalize it for later
+	// but not do it
 	ReverseRelationship *Relationship
 }
 
+// TODO(karuppiah7890): This feels a bit complicated due to some premature generalization idea for any
+// relationship. We should make it specific and simple and give an idea of how to generalize it for later
+// but not do it
 var Parent = Relationship{Name: "Parent"}
 var Child = Relationship{Name: "Child"}
 var Sibling = Relationship{Name: "Sibling"}
 var Spouse = Relationship{Name: "Spouse"}
 
 func init() {
+	// TODO(karuppiah7890): This feels a bit complicated due to some premature generalization idea for any
+	// relationship. We should make it specific and simple and give an idea of how to generalize it for later
+	// but not do it
 	Parent.ReverseRelationship = &Child
 	Child.ReverseRelationship = &Parent
 	Sibling.ReverseRelationship = &Sibling
