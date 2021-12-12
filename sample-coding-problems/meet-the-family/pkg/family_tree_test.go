@@ -25,20 +25,7 @@ func TestAddPerson(t *testing.T) {
 		t.Fatalf("expected no error while getting person but got error - %v", err)
 	}
 
-	name := person.GetName()
-	if name != expectedName {
-		t.Fatalf("expected person name to be %v but got %v", expectedName, name)
-	}
-
-	gender := person.GetGender()
-	if gender != expectedGender {
-		t.Fatalf("expected person gender to be %v but got %v", expectedGender, gender)
-	}
-
-	id := person.GetID()
-	if id != expectedID {
-		t.Fatalf("expected person ID to be %v but got %v", expectedID, id)
-	}
+	assertPerson(t, person, expectedName, expectedGender, expectedID)
 }
 
 func TestAddChildToMother(t *testing.T) {
@@ -69,20 +56,7 @@ func TestAddChildToMother(t *testing.T) {
 			t.Fatalf("expected no error while getting person but got error - %v", err)
 		}
 
-		name := child.GetName()
-		if name != expectedChildName {
-			t.Fatalf("expected person name to be %v but got %v", expectedChildName, name)
-		}
-
-		gender := child.GetGender()
-		if gender != expectedChildGender {
-			t.Fatalf("expected person gender to be %v but got %v", expectedChildGender, gender)
-		}
-
-		id := child.GetID()
-		if id != expectedChildID {
-			t.Fatalf("expected person ID to be %v but got %v", expectedChildID, id)
-		}
+		assertPerson(t, child, expectedChildName, expectedChildGender, expectedChildID)
 
 		childRelations := child.GetRelations()
 		parents := childRelations["Parent"]
@@ -180,4 +154,21 @@ func TestAddChildToMother(t *testing.T) {
 			t.Fatalf("expected error to be of type PersonNotMotherError but it is of type %T. Error - %v", err, err)
 		}
 	})
+}
+
+func assertPerson(t *testing.T, person *pkg.Person, expectedName string, expectedGender pkg.Gender, expectedID int) {
+	name := person.GetName()
+	if name != expectedName {
+		t.Fatalf("expected person name to be %v but got %v", expectedName, name)
+	}
+
+	gender := person.GetGender()
+	if gender != expectedGender {
+		t.Fatalf("expected person gender to be %v but got %v", expectedGender, gender)
+	}
+
+	id := person.GetID()
+	if id != expectedID {
+		t.Fatalf("expected person ID to be %v but got %v", expectedID, id)
+	}
 }
