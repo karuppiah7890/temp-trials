@@ -156,6 +156,109 @@ func TestAddChildToMother(t *testing.T) {
 	})
 }
 
+func TestAddSpouseToPerson(t *testing.T) {
+	t.Run("Spouse Added Successfully", func(t *testing.T) {
+		expectedFamilyCount := 2
+		expectedSpouseName := "King Shan"
+		expectedSpouseGender := pkg.Male
+		expectedSpouseID := 2
+
+		personName := "Queen Anga"
+
+		f := pkg.NewFamilyTree()
+
+		f.AddPerson(personName, pkg.Female)
+
+		err := f.AddSpouseToPerson(personName, expectedSpouseName, expectedSpouseGender)
+		if err != nil {
+			t.Fatalf("expected no error while adding spouse to person but got error - %v", err)
+		}
+
+		familyCount := f.GetFamilyCount()
+		if familyCount != expectedFamilyCount {
+			t.Fatalf("expected family count to be %v but got %v", expectedFamilyCount, familyCount)
+		}
+
+		spouse, err := f.GetPerson(expectedSpouseName)
+		if err != nil {
+			t.Fatalf("expected no error while getting person but got error - %v", err)
+		}
+
+		assertPerson(t, spouse, expectedSpouseName, expectedSpouseGender, expectedSpouseID)
+
+		spouses := spouse.GetRelations()["Spouse"]
+		numberOfSpouses := len(spouses)
+		expectedNumberOfSpouses := 1
+
+		if numberOfSpouses != expectedNumberOfSpouses {
+			t.Fatalf("expected person to have %v spouse(s) but got %v", expectedNumberOfSpouses, numberOfSpouses)
+		}
+
+		spouse1 := spouses[0]
+		expectedSpouseName = personName
+		parentName := spouse1.GetName()
+		expectedParentGender := pkg.Female
+		parentGender := spouse1.GetGender()
+
+		if parentName != expectedSpouseName {
+			t.Fatalf("expected parent to have name '%v' but got '%v'", expectedSpouseName, parentName)
+		}
+
+		if parentGender != expectedParentGender {
+			t.Fatalf("expected parent to have gender '%v' but got '%v'", expectedParentGender, parentGender)
+		}
+
+		mother, err := f.GetPerson(personName)
+		if err != nil {
+			t.Fatalf("expected no error while getting person but got error - %v", err)
+		}
+
+		children := mother.GetRelations()["Child"]
+		numberOfChildren := len(children)
+		expectedNumberOfChildren := 1
+
+		if numberOfChildren != expectedNumberOfChildren {
+			t.Fatalf("expected mother to have %v children but got %v", expectedNumberOfChildren, numberOfChildren)
+		}
+
+		spouse = children[0]
+		childName := spouse.GetName()
+		childGender := spouse.GetGender()
+
+		if childName != expectedSpouseName {
+			t.Fatalf("expected child to have name '%v' but got '%v'", expectedSpouseName, childName)
+		}
+
+		if childGender != expectedSpouseGender {
+			t.Fatalf("expected child to have gender '%v' but got '%v'", expectedSpouseGender, childGender)
+		}
+	})
+
+	t.Run("Person not found", func(t *testing.T) {
+		childName := "Amba"
+		childGender := pkg.Female
+		motherName := "Queen Anga"
+		expectedErrorMessage := "Mother named 'non-existent' not found"
+
+		f := pkg.NewFamilyTree()
+
+		f.AddPerson(motherName, pkg.Female)
+
+		err := f.AddChildToMother("non-existent", childName, childGender)
+		if err == nil {
+			t.Fatal("expected error while adding child to non existent mother but got no error")
+		}
+
+		if err, ok := err.(pkg.PersonNotFoundError); ok {
+			if err.Error() != expectedErrorMessage {
+				t.Fatalf("expected error message to be '%v' but got '%v'", expectedErrorMessage, err.Error())
+			}
+		} else {
+			t.Fatalf("expected error to be of type PersonNotFoundError but it is of type %T. Error - %v", err, err)
+		}
+	})
+}
+
 func assertPerson(t *testing.T, person *pkg.Person, expectedName string, expectedGender pkg.Gender, expectedID int) {
 	name := person.GetName()
 	if name != expectedName {

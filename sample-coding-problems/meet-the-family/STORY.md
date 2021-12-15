@@ -184,3 +184,10 @@ In a Family Tree, for a person, there's
 - Relations
 
 From an outside perspective, every time when we need to pass person details - we have to pass name and gender, instead can we pass person here too, but a different person type. Not sure what the name would be. But yeah, I could still do away with name and gender in function / method call instead of putting it in struct as that struct would have only two fields, but yeah, they are related fields - fields related to a person
+
+---
+
+[IDEA]
+Some ideas for easy solving - think of family tree as tree or graph and have relations all around - nodes and edges. Each node is a person and edges are relationships - directed edges where we can have two edges between two people - one for a relationship and another for a reverse relationship. For example, Mother has child relationship with child, and child has mother relationship with mother
+
+Check how people generally store graphs, trees. For example, having a 2x2 matrix for a graph is a common example I think. But it can also use up a lot of unnecessary space

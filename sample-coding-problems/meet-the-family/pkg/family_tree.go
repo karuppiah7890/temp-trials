@@ -80,6 +80,35 @@ func (f *familyTree) AddChildToMother(motherName string, childName string, child
 
 // TODO(karuppiah7890): AddSpouseToPerson(personName string, spouseName string, spouseGender Gender)
 
+func (f *familyTree) AddSpouseToPerson(personName string, spouseName string, spouseGender Gender) error {
+	person, err := f.GetPerson(personName)
+
+	if err != nil {
+		return PersonNotFoundError(fmt.Sprintf("Person named '%s' not found", personName))
+	}
+
+	// TODO(karuppiah7890): Adding a new person to a family seems like a usual process - incrementing family
+	// count and constructing a person with ID and adding them. We need to get rid of this duplicate code here
+	// and in other places
+	f.familyCount++
+	spouse := &Person{
+		id:        f.familyCount,
+		name:      spouseName,
+		gender:    spouseGender,
+		relations: make(map[string][]*Person),
+	}
+
+	// TODO(karuppiah7890): This feels a bit complicated due to some premature generalization idea for any
+	// relationship. We should make it specific and simple and give an idea of how to generalize it for later
+	// but not do it
+	person.relations[Spouse.Name] = append(person.relations[Spouse.Name], spouse)
+	spouse.relations[Spouse.ReverseRelationship.Name] = append(spouse.relations[Spouse.ReverseRelationship.Name], person)
+
+	f.family[spouse.name] = spouse
+
+	return nil
+}
+
 func (f *familyTree) GetFamilyCount() int {
 	return f.familyCount
 }
